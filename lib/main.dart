@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineering/widgets/labeled_divider.dart';
+import 'package:flutter_engineering/widgets/lifecycle_widget.dart';
 
 void main() {
   runApp(const App());
@@ -12,9 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: SafeArea(
-          child: Column(children: [LabeledDivider(label: 'Hello')]),
-        ),
+        body: SafeArea(child: Column(children: [LifecycleWidget()])),
       ),
     );
   }
