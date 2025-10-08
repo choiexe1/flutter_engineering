@@ -1,16 +1,36 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/src/rendering/box.dart';
 
 class RenderLabeledDivider extends RenderBox {
   String _label;
   double _thickness;
   Color _color;
 
+  @override
+  bool hitTest(HitTestResult result, {required Offset position}) {
+    final BoxHitTestEntry entry = BoxHitTestEntry(this, position);
+    if (size.contains(position)) {
+      result.add(entry);
+      return true;
+    }
+    return false;
+  }
+
   set label(String value) {
     if (_label != value) {
       _label = value;
     }
     markNeedsSemanticsUpdate();
+    markNeedsLayout();
+  }
+
+  @override
+  void dispose() {
+    layer?.dispose();
+    _textPainter.dispose();
+    super.dispose();
   }
 
   set thickness(double value) {
